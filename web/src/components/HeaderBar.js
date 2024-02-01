@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {UserContext} from '../context/User';
 
-import {Button, Container, Icon, Menu, Segment} from 'semantic-ui-react';
 import {API, getLogo, getSystemName, isAdmin, isMobile, showSuccess} from '../helpers';
 import '../index.css';
 
@@ -44,7 +43,8 @@ const HeaderBar = () => {
     const logo = getLogo();
     var themeMode = localStorage.getItem('theme-mode');
     const currentDate = new Date();
-    const isNewYear = currentDate.getMonth() === 0 && currentDate.getDate() === 1;
+    // enable fireworks on new year(1.1 and 2.9-2.24)
+    const isNewYear = (currentDate.getMonth() === 0 && currentDate.getDate() === 1) || (currentDate.getMonth() === 1 && currentDate.getDate() >= 9 && currentDate.getDate() <= 24);
 
     async function logout() {
         setShowSidebar(false);
